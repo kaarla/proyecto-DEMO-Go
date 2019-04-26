@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <title>The product encyclopedia</title>
+</head>
+
+<body>
+  <h1>The product encyclopedia</h1>
+  <!--
+    This section of the document specifies the table that will
+    be used to display the list of products and their Name
+   -->
+  <table>
+    <tr>
+      <th>Sku</th>
+      <th>Name</th>
+    </tr>
+  </table>
+  <br/>
+
+  <script>
+    birdTable = document.querySelector("table")
+
+    fetch("/product")
+      .then(response => response.json())
+      .then(products => {
+        //Once we fetch the list, we iterate over it
+        products.forEach(product => {
+          // Create the table row
+          row = document.createElement("tr")
+
+          // Create the table data elements for the species and
+					// description columns
+          sku = document.createElement("td")
+          sku.innerHTML = product.sku
+          name = document.createElement("td")
+          name.innerHTML = product.name
+
+          // Add the data elements to the row
+          row.appendChild(sku)
+          row.appendChild(name)
+          // Finally, add the row element to the table itself
+          birdTable.appendChild(row)
+        })
+      })
+  </script>
+</body>
+
+
+
